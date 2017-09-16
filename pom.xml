@@ -4,16 +4,158 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <groupId>com.primecoder.spider</groupId>
     <artifactId>parent</artifactId>
     <version>1.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+    <modules>
+        <module>spider-download</module>
+        <module>spider-parser</module>
+        <module>spider-message</module>
+        <module>spider-storage</module>
+        <module>spider-controller</module>
+        <module>spider-dao</module>
+        <module>spider-util</module>
+    </modules>
+    <packaging>pom</packaging>
 	
 	<properties>
+        <spider.center.version>1.0-SNAPSHOT</spider.center.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <httpclient.version>4.5.2</httpclient.version>
+        <commons.codec.version>1.2</commons.codec.version>
+        <commons.lang.version>2.6</commons.lang.version>
+        <commons.logging.version>1.0.3</commons.logging.version>
+        <guava.verison>18.0</guava.verison>
+        <mysql.version>6.0.5</mysql.version>
+        <activemq.version>5.14.0</activemq.version>
+        <spring.boot.version>1.5.4.RELEASE</spring.boot.version>
+        <mybatisboot.version>1.1.1</mybatisboot.version>
+        <mapper.version>3.3.6</mapper.version>
+        <fastjson.version>1.2.23</fastjson.version>
+        <jsoup.version>1.7.2</jsoup.version>
+        <primecoder.core.util.version>1.0-SNAPSHOT</primecoder.core.util.version>
     </properties>
 
+    <dependencyManagement>
+
+        <dependencies>
+
+            <dependency>
+                <groupId>com.primecoder.spider</groupId>
+                <artifactId>spider-download</artifactId>
+                <version>${spider.center.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.primecoder.spider</groupId>
+                <artifactId>spider-message</artifactId>
+                <version>${spider.center.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.primecoder.spider</groupId>
+                <artifactId>spider-parser</artifactId>
+                <version>${spider.center.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.primecoder.spider</groupId>
+                <artifactId>spider-storage</artifactId>
+                <version>${spider.center.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.primecoder.spider</groupId>
+                <artifactId>spider-controller</artifactId>
+                <version>${spider.center.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.primecoder.spider</groupId>
+                <artifactId>spider-dao</artifactId>
+                <version>${spider.center.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.primecoder.spider</groupId>
+                <artifactId>spider-util</artifactId>
+                <version>${spider.center.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons.codec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons.lang.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons.logging.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.verison}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatisboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper</artifactId>
+                <version>${mapper.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.primecoder.core</groupId>
+                <artifactId>util</artifactId>
+                <version>${primecoder.core.util.version}</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
 
 </project>

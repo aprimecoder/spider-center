@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.primecoder.spider.dao.mapper.BloggerTagMapper">
+
+    <resultMap id="bloggerTagMap" type="com.primecoder.spider.dao.entity.BloggerTagEntity">
+        <result column="tag_id" property="tagId"/>
+        <result column="blogger_name" property="bloggerName"/>
+        <result column="tag_name" property="tagName"/>
+        <result column="tag_count" property="tagCount"/>
+        <result column="tag_url" property="tagUrl"/>
+        <result column="tag_type" property="tagType"/>
+    </resultMap>
+
+
+    <sql id="queryColumns">
+        tag_id,
+        blogger_name,
+        tag_name,
+        tag_count,
+        tag_url,
+        tag_type
+    </sql>
+
+    <insert id="add" parameterType="com.primecoder.spider.dao.entity.BloggerTagEntity">
+        insert blogger_tag ( tag_id,blogger_name,tag_name,tag_count,tag_url,tag_type)
+        VALUES(#{tagId},#{bloggerName},#{tagName},#{tagCount},#{tagUrl},#{tagType})
+    </insert>
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.primecoder.spider.dao.mapper.BloggerInfoMapper">
+
+    <resultMap id="bloggerInfoMap" type="com.primecoder.spider.dao.entity.BloggerInfoEntity">
+        <result column="blogger_id" property="bloggerId"/>
+        <result column="blogger_name" property="bloggerName"/>
+        <result column="blogger_url" property="bloggerUrl"/>
+        <result column="is_handle" property="isHandle"/>
+        <result column="is_downloaded" property="isDownloaded"/>
+    </resultMap>
+
+
+    <sql id="queryColumns">
+        blogger_id,
+        blogger_name,
+        blogger_url,
+        is_handle,
+        is_downloaded
+    </sql>
+
+    <select id="selectBloggerNameBySize" parameterType="Integer" resultType="String">
+        select blogger_name from blogger_info
+        where is_downloaded = false
+        LIMIT 0,#{size}
+    </select>
+
+    <update id="setDownloaded" parameterType="String">
+        update blogger_info
+        <set>
+            is_downloaded = true
+        </set>
+        where blogger_name = #{bloggerName}
+    </update>
+
+</mapper>

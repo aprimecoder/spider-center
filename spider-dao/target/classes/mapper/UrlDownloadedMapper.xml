@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.primecoder.spider.dao.mapper.UrlDownloadedMapper">
+
+    <resultMap id="urlDownloadedMap" type="com.primecoder.spider.dao.entity.UrlDownloadedEntity">
+        <result column="blogger_name" property="bloggerName"/>
+        <result column="url" property="url"/>
+        <result column="file_path" property="filepath"/>
+        <result column="url_type" property="type"/>
+    </resultMap>
+
+
+    <sql id="queryColumns">
+        blogger_name,
+        url,
+        file_path,
+        url_type
+    </sql>
+
+    <insert id="add" parameterType="com.primecoder.spider.dao.entity.UrlDownloadedEntity">
+        insert blogger_url_downloaded ( blogger_name,url,file_path,url_type)
+        VALUES(#{bloggerName},#{url},#{filepath},#{type})
+    </insert>
+
+</mapper>

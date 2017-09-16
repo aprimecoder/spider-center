@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.primecoder.spider.dao.mapper.BloggerPageMapper">
+
+    <resultMap id="bloggerInfoMap" type="com.primecoder.spider.dao.entity.BloggerPageEntity">
+        <result column="page_id" property="pageId"/>
+        <result column="blogger_name" property="bloggerName"/>
+        <result column="read_cnt" property="readCount"/>
+        <result column="comment_cnt" property="commentCount"/>
+        <result column="recommend_cnt" property="recommendCount"/>
+        <result column="blogger_page_url" property="bloggerPageUrl"/>
+        <result column="tag_id" property="tagId"/>
+    </resultMap>
+
+
+    <sql id="queryColumns">
+        page_id,
+        blogger_name,
+        read_cnt,
+        comment_cnt,
+        recommend_cnt,
+        blogger_page_url,
+        tag_id
+    </sql>
+
+    <select id="existByUrl" parameterType="String" resultType="Integer">
+        select count(1) cnt from blogger_page_info
+        where blogger_page_url = #{url}
+    </select>
+
+    <insert id="add" parameterType="com.primecoder.spider.dao.entity.BloggerPageEntity">
+        insert into blogger_page_info (page_id,blogger_name,read_cnt,comment_cnt,recommend_cnt,tag_id,blogger_page_url)
+        values (#{pageId},#{bloggerName},#{readCount},#{commentCount},#{recommendCount},#{tagId},#{bloggerPageUrl})
+    </insert>
+
+</mapper>
