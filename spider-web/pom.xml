@@ -9,33 +9,25 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spider-controller</artifactId>
+    <artifactId>spider-web</artifactId>
 
     <dependencies>
+
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.primecoder.spider</groupId>
-            <artifactId>spider-dao</artifactId>
+            <artifactId>spider-controller</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.primecoder.spider</groupId>
-            <artifactId>spider-download</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.primecoder.spider</groupId>
-            <artifactId>spider-storage</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.primecoder.spider</groupId>
-            <artifactId>spider-parser</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
     </dependencies>
+
 </project>

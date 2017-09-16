@@ -1,5 +1,6 @@
-package com.primecoder.spider.message;
+package spider.message;
 
+import com.primecoder.spider.Application;
 import com.primecoder.spider.message.core.IMessageSend;
 import com.primecoder.spider.util.constant.Constant;
 import org.junit.Test;
@@ -14,7 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * E-mail : aprimecoder@gmail.com
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes= Application.class)
 public class TestSendMessage {
 
 

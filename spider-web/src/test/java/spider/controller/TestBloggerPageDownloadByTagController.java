@@ -1,6 +1,5 @@
-package com.primecoder.spider.controller;
+package spider.controller;
 
-import com.primecoder.spider.Application;
 import com.primecoder.spider.controller.core.tag.BloggerPageDownloadByTagController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * E-mail : aprimecoder@gmail.com
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest
 public class TestBloggerPageDownloadByTagController {
 
     @Autowired

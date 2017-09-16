@@ -22,6 +22,7 @@
         <module>spider-controller</module>
         <module>spider-dao</module>
         <module>spider-util</module>
+        <module>spider-web</module>
     </modules>
     <packaging>pom</packaging>
 	
@@ -88,6 +89,12 @@
             <dependency>
                 <groupId>com.primecoder.spider</groupId>
                 <artifactId>spider-util</artifactId>
+                <version>${spider.center.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.primecoder.spider</groupId>
+                <artifactId>spider-web</artifactId>
                 <version>${spider.center.version}</version>
             </dependency>
 

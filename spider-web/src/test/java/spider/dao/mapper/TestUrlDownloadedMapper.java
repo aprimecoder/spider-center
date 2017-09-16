@@ -1,6 +1,7 @@
-package com.primecoder.spider.dao.mapper;
+package spider.dao.mapper;
 
 import com.primecoder.spider.dao.entity.UrlDownloadedEntity;
+import com.primecoder.spider.dao.mapper.UrlDownloadedMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

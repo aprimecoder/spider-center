@@ -1,5 +1,6 @@
-package com.primecoder.spider.dao.mapper;
+package spider.dao.mapper;
 
+import com.primecoder.spider.dao.mapper.BloggerInfoMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
