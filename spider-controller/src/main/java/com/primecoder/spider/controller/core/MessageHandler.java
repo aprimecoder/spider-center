@@ -100,20 +100,42 @@ public class MessageHandler {
                 break;
             case TAGLIST:
                 ParserTagListBean parserTagListBean = (ParserTagListBean)parserBean;
+
+                parserMessageService.insertTagList(parserTagListBean,false);
+
                 List<BloggerTagEntity> bloggerTagEntities
                         = parserBloggerTagListPage.parser(parserTagListBean.getFilePath(),parserTagListBean.getBloggerName());
                 bloggerTagListEntityHandler.handler(bloggerTagEntities);
+
+                parserMessageService.insertTagList(parserTagListBean,true);
+
                 break;
 
             case TAGINDEX :
                 ParserTagIndexBean parserTagIndexBean = (ParserTagIndexBean)parserBean;
+
+                parserMessageService.insertTagIndex(parserTagIndexBean,false);
+
                 JSONObject pageObj = parserBloggerTagIndex.parser(parserTagIndexBean.getTagPath(),parserTagIndexBean.getBloggerName(),
                         parserTagIndexBean.getTagId(),parserTagIndexBean.getUrlType().getType(),parserTagIndexBean.getTagName());
                 bloggerTagPagesHandler.handler(pageObj);
+
+                parserMessageService.insertTagIndex(parserTagIndexBean,true);
+
                 break;
             case TAG :
                 ParserTagBean parserTagBean = (ParserTagBean)parserBean;
+
+                parserMessageService.insertTag(parserTagBean,false);
+
                 parserBloggerTagPage.parser(parserTagBean.getTagFilePath(),parserTagBean.getBloggerName(),parserTagBean.getTagId());
+
+                parserMessageService.insertTag(parserTagBean,true);
+
+                break;
+            default:
+                parserBean.setUrlType(UrlType.ERROR);
+                parserMessageService.insertError(parserBean);
         }
     }
 }

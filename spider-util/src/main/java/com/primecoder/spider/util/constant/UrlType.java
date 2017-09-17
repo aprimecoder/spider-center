@@ -6,7 +6,7 @@ package com.primecoder.spider.util.constant;
  */
 public enum UrlType {
 
-    CATEGORY(0),HOMEPAGE(1),BLOGGERPAGE(2),CATEGORYLIST(3),TAG(4),TAGLIST(5),TAGINDEX(6);
+    CATEGORY(0),HOMEPAGE(1),BLOGGERPAGE(2),CATEGORYLIST(3),TAG(4),TAGLIST(5),TAGINDEX(6),ERROR(7);
 
     private int type;
 
