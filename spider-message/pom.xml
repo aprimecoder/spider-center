@@ -18,5 +18,10 @@
             <artifactId>spider-util</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.primecoder.spider</groupId>
+            <artifactId>spider-dao</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

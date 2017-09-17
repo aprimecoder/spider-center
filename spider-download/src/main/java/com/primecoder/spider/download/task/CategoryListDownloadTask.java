@@ -7,6 +7,7 @@ import com.primecoder.spider.download.core.HttpClientDownload;
 import com.primecoder.spider.message.bean.ParserCategoryListBean;
 import com.primecoder.spider.message.core.IMessageSend;
 import com.primecoder.spider.storage.core.Storage;
+import com.primecoder.spider.util.MyThreadLocal;
 import com.primecoder.spider.util.constant.Constant;
 import com.primecoder.spider.util.constant.UrlType;
 import com.primecoder.spider.util.context.ContextHolder;
@@ -36,6 +37,8 @@ public class CategoryListDownloadTask implements ITask{
 
     private String filePath;
 
+    private String requestId;
+
     public CategoryListDownloadTask(String tagListUrl, String bloggerName, String filePath) {
 
         this.tagListUrl = tagListUrl;
@@ -46,10 +49,14 @@ public class CategoryListDownloadTask implements ITask{
         httpClientDownload = (HttpClientDownload) ContextHolder.getBean(Constant.BeanName.HTTP_CLIENT_DOWNLOAD);
         storage = (Storage)ContextHolder.getBean(Constant.BeanName.STORAGE);
         iMessageSend = (IMessageSend) ContextHolder.getBean(Constant.BeanName.ACTIVE_MQ_MESSAGE_SEND);
+
+        this.requestId = MyThreadLocal.getRequestId();
     }
 
     @Override
     public Object call() throws Exception {
+
+        MyThreadLocal.setRequestId(this.requestId);
 
         String content = httpClientDownload.download(tagListUrl);
 
@@ -88,6 +95,8 @@ public class CategoryListDownloadTask implements ITask{
         parserCategoryListBean.setBloggerName(bloggerName);
         parserCategoryListBean.setFilePath(filePath);
         parserCategoryListBean.setUrlType(UrlType.CATEGORYLIST);
+
+        parserCategoryListBean.setRequestId(MyThreadLocal.getRequestId());
 
         iMessageSend.send(JSON.toJSONString(parserCategoryListBean));
     }

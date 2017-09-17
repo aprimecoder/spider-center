@@ -6,7 +6,10 @@ import com.primecoder.spider.controller.core.tag.BloggerCategoryListEntityHandle
 import com.primecoder.spider.controller.core.tag.BloggerTagListEntityHandler;
 import com.primecoder.spider.controller.core.tag.BloggerTagPagesHandler;
 import com.primecoder.spider.dao.entity.BloggerTagEntity;
+import com.primecoder.spider.dao.entity.ParserMessageEntity;
+import com.primecoder.spider.dao.mapper.ParserMessageMapper;
 import com.primecoder.spider.message.bean.*;
+import com.primecoder.spider.message.service.ParserMessageService;
 import com.primecoder.spider.parser.*;
 import com.primecoder.spider.util.constant.Constant;
 import com.primecoder.spider.util.constant.UrlType;
@@ -52,6 +55,9 @@ public class MessageHandler {
     @Autowired
     private ParserBloggerTagPage parserBloggerTagPage;
 
+    @Autowired
+    private ParserMessageService parserMessageService;
+
     @JmsListener(destination = Constant.QUEUE_NAME)
     public void receive(String message) {
 
@@ -71,15 +77,25 @@ public class MessageHandler {
 
                 ParserCategoryListBean parserCategoryListBean = (ParserCategoryListBean)parserBean;
 
+                parserMessageService.insertCategoryList(parserCategoryListBean,false);
+
                 List<BloggerTagEntity> bloggerCategoryEntities
                         = parserBloggerCategoryListPage.parser(parserCategoryListBean.getFilePath(), parserCategoryListBean.getBloggerName());
                 bloggerCategoryListEntityHandler.handler(bloggerCategoryEntities);
+
+                parserMessageService.insertCategoryList(parserCategoryListBean,true);
+
                 break;
 
             case CATEGORY :
                 ParserCategoryBean parserCategoryBean = (ParserCategoryBean)parserBean;
+
+                parserMessageService.insertCategory(parserCategoryBean,false);
+
                 parserBloggerCategoryPage.parser(parserCategoryBean.getTagPath(),parserCategoryBean.getBloggerName(),
                         parserCategoryBean.getTagId(),urlType.getType(),parserCategoryBean.getTagName());
+
+                parserMessageService.insertCategory(parserCategoryBean,true);
 
                 break;
             case TAGLIST:

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.primecoder.spider.dao.mapper.ParserMessageMapper">
+
+    <resultMap id="parserMessageMap" type="com.primecoder.spider.dao.entity.ParserMessageEntity">
+        <result column="request_id" property="requestId"/>
+        <result column="url_type" property="urlType"/>
+        <result column="blogger_name" property="bloggerName"/>
+        <result column="tag_id" property="tagId"/>
+        <result column="tag_name" property="tagName"/>
+        <result column="file_path" property="filePath"/>
+        <result column="is_handler" property="isHandler"/>
+    </resultMap>
+
+    <sql id="queryColumns">
+        request_id,
+        url_type,
+        blogger_name,
+        tag_id,
+        tag_name,
+        file_path,
+        is_handler
+    </sql>
+
+
+</mapper>

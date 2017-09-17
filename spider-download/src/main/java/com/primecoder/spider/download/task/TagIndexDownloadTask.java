@@ -9,6 +9,7 @@ import com.primecoder.spider.download.core.HttpClientDownload;
 import com.primecoder.spider.message.bean.ParserTagIndexBean;
 import com.primecoder.spider.message.core.IMessageSend;
 import com.primecoder.spider.storage.core.Storage;
+import com.primecoder.spider.util.MyThreadLocal;
 import com.primecoder.spider.util.UuidGenerate;
 import com.primecoder.spider.util.constant.Constant;
 import com.primecoder.spider.util.constant.UrlType;
@@ -37,7 +38,11 @@ public class TagIndexDownloadTask implements ITask{
 
     private BloggerTagEntity bloggerTagEntity;
 
+    private String requestId;
+
     public TagIndexDownloadTask(BloggerTagEntity bloggerTagEntity) {
+
+        MyThreadLocal.setRequestId(this.requestId);
 
         this.bloggerTagEntity = bloggerTagEntity;
 
@@ -50,6 +55,8 @@ public class TagIndexDownloadTask implements ITask{
 
     @Override
     public Object call() throws Exception {
+
+        MyThreadLocal.setRequestId(this.requestId);
 
         String content = httpClientDownload.download(bloggerTagEntity.getTagUrl());
 
@@ -92,6 +99,8 @@ public class TagIndexDownloadTask implements ITask{
         parserTagIndexBean.setTagName(bloggerTagEntity.getTagName());
         parserTagIndexBean.setTagId(bloggerTagEntity.getTagId());
         parserTagIndexBean.setBloggerName(bloggerTagEntity.getBloggerName());
+
+        parserTagIndexBean.setRequestId(MyThreadLocal.getRequestId());
 
         iMessageSend.send(JSON.toJSONString(parserTagIndexBean));
     }

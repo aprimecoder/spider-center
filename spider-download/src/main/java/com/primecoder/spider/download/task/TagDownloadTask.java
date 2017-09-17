@@ -7,6 +7,7 @@ import com.primecoder.spider.download.core.HttpClientDownload;
 import com.primecoder.spider.message.bean.ParserTagBean;
 import com.primecoder.spider.message.core.IMessageSend;
 import com.primecoder.spider.storage.core.Storage;
+import com.primecoder.spider.util.MyThreadLocal;
 import com.primecoder.spider.util.UuidGenerate;
 import com.primecoder.spider.util.constant.Constant;
 import com.primecoder.spider.util.constant.UrlType;
@@ -38,6 +39,8 @@ public class TagDownloadTask implements ITask{
 
     private String tagId;
 
+    private String requestId;
+
     public TagDownloadTask(String url,String path,String bloggerName,String tagId) {
 
         this.url = url;
@@ -50,10 +53,14 @@ public class TagDownloadTask implements ITask{
         storage = (Storage)ContextHolder.getBean(Constant.BeanName.STORAGE);
         iMessageSend = (IMessageSend) ContextHolder.getBean(Constant.BeanName.ACTIVE_MQ_MESSAGE_SEND);
         uuidGenerate = (UuidGenerate) ContextHolder.getBean(Constant.BeanName.UUID_GENERATE);
+
+        MyThreadLocal.setRequestId(this.requestId);
     }
 
     @Override
     public Object call() throws Exception {
+
+        MyThreadLocal.setRequestId(this.requestId);
 
         String content = httpClientDownload.download(url);
 
@@ -86,6 +93,8 @@ public class TagDownloadTask implements ITask{
         parserTagBean.setTagId(tagId);
         parserTagBean.setUrlType(UrlType.TAG);
         parserTagBean.setTagFilePath(path);
+
+        parserTagBean.setRequestId(MyThreadLocal.getRequestId());
 
         iMessageSend.send(JSON.toJSONString(parserTagBean));
     }
