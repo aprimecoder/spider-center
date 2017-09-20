@@ -1,5 +1,8 @@
 package com.primecoder.spider.dao.entity;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -8,6 +11,10 @@ import javax.persistence.Table;
  */
 @Table(name="blgger_parser_message")
 public class ParserMessageEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String requestId;
 
@@ -22,6 +29,14 @@ public class ParserMessageEntity {
     private String filePath;
 
     private Boolean isHandler;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getRequestId() {
         return requestId;

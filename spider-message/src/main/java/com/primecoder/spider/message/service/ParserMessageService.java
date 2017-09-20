@@ -17,7 +17,7 @@ public class ParserMessageService {
     @Autowired
     private ParserMessageMapper parserMessageMapper;
 
-    public void insertCategoryList(ParserCategoryListBean parserCategoryListBean,boolean isHandler) {
+    public int insertCategoryList(ParserCategoryListBean parserCategoryListBean,boolean isHandler) {
 
         ParserMessageEntity parserMessageEntity = new ParserMessageEntity();
         parserMessageEntity.setRequestId(parserCategoryListBean.getRequestId());
@@ -26,9 +26,11 @@ public class ParserMessageService {
         parserMessageEntity.setFilePath(parserCategoryListBean.getFilePath());
         parserMessageEntity.setHandler(isHandler);
         parserMessageMapper.insert(parserMessageEntity);
+
+        return parserMessageEntity.getId();
     }
 
-    public void insertCategory(ParserCategoryBean parserCategoryBean,boolean isHandler) {
+    public int insertCategory(ParserCategoryBean parserCategoryBean,boolean isHandler) {
 
         ParserMessageEntity parserMessageEntity = new ParserMessageEntity();
         parserMessageEntity.setRequestId(parserCategoryBean.getRequestId());
@@ -39,9 +41,11 @@ public class ParserMessageService {
         parserMessageEntity.setTagName(parserCategoryBean.getTagName());
         parserMessageEntity.setHandler(isHandler);
         parserMessageMapper.insert(parserMessageEntity);
+
+        return parserMessageEntity.getId();
     }
 
-    public void insertTagList(ParserTagListBean parserTagListBean,boolean isHandler) {
+    public int insertTagList(ParserTagListBean parserTagListBean,boolean isHandler) {
 
         ParserMessageEntity parserMessageEntity = new ParserMessageEntity();
         parserMessageEntity.setRequestId(parserTagListBean.getRequestId());
@@ -50,9 +54,11 @@ public class ParserMessageService {
         parserMessageEntity.setFilePath(parserTagListBean.getFilePath());
         parserMessageEntity.setHandler(isHandler);
         parserMessageMapper.insert(parserMessageEntity);
+
+        return parserMessageEntity.getId();
     }
 
-    public void insertTagIndex(ParserTagIndexBean parserTagIndexBean,boolean isHandler) {
+    public int insertTagIndex(ParserTagIndexBean parserTagIndexBean,boolean isHandler) {
 
         ParserMessageEntity parserMessageEntity = new ParserMessageEntity();
         parserMessageEntity.setRequestId(parserTagIndexBean.getRequestId());
@@ -64,9 +70,11 @@ public class ParserMessageService {
         parserMessageEntity.setHandler(isHandler);
 
         parserMessageMapper.insert(parserMessageEntity);
+
+        return parserMessageEntity.getId();
     }
 
-    public void insertTag(ParserTagBean parserTagBean,boolean isHandler) {
+    public int insertTag(ParserTagBean parserTagBean,boolean isHandler) {
 
         ParserMessageEntity parserMessageEntity = new ParserMessageEntity();
         parserMessageEntity.setRequestId(parserTagBean.getRequestId());
@@ -77,9 +85,11 @@ public class ParserMessageService {
         parserMessageEntity.setHandler(isHandler);
 
         parserMessageMapper.insert(parserMessageEntity);
+
+        return parserMessageEntity.getId();
     }
 
-    public void insertError(ParserBean parserBean) {
+    public int insertError(ParserBean parserBean) {
 
         ParserMessageEntity parserMessageEntity = new ParserMessageEntity();
         parserMessageEntity.setRequestId(parserBean.getRequestId());
@@ -87,5 +97,16 @@ public class ParserMessageService {
         parserMessageEntity.setHandler(true);
 
         parserMessageMapper.insert(parserMessageEntity);
+
+        return parserMessageEntity.getId();
+    }
+
+    public void updateHandler(int id) {
+
+        ParserMessageEntity parserMessageEntity = new ParserMessageEntity();
+        parserMessageEntity.setId(id);
+        parserMessageEntity.setHandler(true);
+
+        parserMessageMapper.updateByPrimaryKeySelective(parserMessageEntity);
     }
 }

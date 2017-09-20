@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 /**
  * Created by primecoder on 2017/9/16.
  * E-mail : aprimecoder@gmail.com

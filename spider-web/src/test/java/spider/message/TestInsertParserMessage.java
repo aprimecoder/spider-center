@@ -31,7 +31,10 @@ public class TestInsertParserMessage {
         ParserMessageEntity parserMessageEntity = new ParserMessageEntity();
         parserMessageEntity.setRequestId(uuidGenerate.generate());
         parserMessageEntity.setUrlType(0);
+        parserMessageEntity.setHandler(false);
 
         parserMessageMapper.insert(parserMessageEntity);
+
+        System.out.println(parserMessageEntity);
     }
 }

@@ -42,7 +42,7 @@ public class TagIndexDownloadTask implements ITask{
 
     public TagIndexDownloadTask(BloggerTagEntity bloggerTagEntity) {
 
-        MyThreadLocal.setRequestId(this.requestId);
+        this.requestId = MyThreadLocal.getRequestId();
 
         this.bloggerTagEntity = bloggerTagEntity;
 

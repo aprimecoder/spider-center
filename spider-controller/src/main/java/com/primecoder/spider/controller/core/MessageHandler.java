@@ -11,6 +11,7 @@ import com.primecoder.spider.dao.mapper.ParserMessageMapper;
 import com.primecoder.spider.message.bean.*;
 import com.primecoder.spider.message.service.ParserMessageService;
 import com.primecoder.spider.parser.*;
+import com.primecoder.spider.util.MyThreadLocal;
 import com.primecoder.spider.util.constant.Constant;
 import com.primecoder.spider.util.constant.UrlType;
 import org.slf4j.Logger;
@@ -64,73 +65,77 @@ public class MessageHandler {
         LOGGER.info("receive a message : {}",message);
 
         ParserBean parserBean = JSON.parseObject(message,ParserBean.class);
-        handler(parserBean);
+
+        MyThreadLocal.setRequestId(parserBean.getRequestId());
+
+        handler(parserBean,message);
     }
 
-    private void handler(ParserBean parserBean) {
+    private void handler(ParserBean parserBean,String message) {
 
         UrlType urlType = parserBean.getUrlType();
+        int messageId;
 
         switch (urlType) {
 
             case CATEGORYLIST :
 
-                ParserCategoryListBean parserCategoryListBean = (ParserCategoryListBean)parserBean;
+                ParserCategoryListBean parserCategoryListBean = JSON.parseObject(message,ParserCategoryListBean.class);
 
-                parserMessageService.insertCategoryList(parserCategoryListBean,false);
+                messageId = parserMessageService.insertCategoryList(parserCategoryListBean,false);
 
                 List<BloggerTagEntity> bloggerCategoryEntities
                         = parserBloggerCategoryListPage.parser(parserCategoryListBean.getFilePath(), parserCategoryListBean.getBloggerName());
                 bloggerCategoryListEntityHandler.handler(bloggerCategoryEntities);
 
-                parserMessageService.insertCategoryList(parserCategoryListBean,true);
+                parserMessageService.updateHandler(messageId);
 
                 break;
 
             case CATEGORY :
-                ParserCategoryBean parserCategoryBean = (ParserCategoryBean)parserBean;
+                ParserCategoryBean parserCategoryBean = JSON.parseObject(message,ParserCategoryBean.class);
 
-                parserMessageService.insertCategory(parserCategoryBean,false);
+                messageId = parserMessageService.insertCategory(parserCategoryBean,false);
 
                 parserBloggerCategoryPage.parser(parserCategoryBean.getTagPath(),parserCategoryBean.getBloggerName(),
                         parserCategoryBean.getTagId(),urlType.getType(),parserCategoryBean.getTagName());
 
-                parserMessageService.insertCategory(parserCategoryBean,true);
+                parserMessageService.updateHandler(messageId);
 
                 break;
             case TAGLIST:
-                ParserTagListBean parserTagListBean = (ParserTagListBean)parserBean;
+                ParserTagListBean parserTagListBean = JSON.parseObject(message,ParserTagListBean.class);
 
-                parserMessageService.insertTagList(parserTagListBean,false);
+                messageId = parserMessageService.insertTagList(parserTagListBean,false);
 
                 List<BloggerTagEntity> bloggerTagEntities
                         = parserBloggerTagListPage.parser(parserTagListBean.getFilePath(),parserTagListBean.getBloggerName());
                 bloggerTagListEntityHandler.handler(bloggerTagEntities);
 
-                parserMessageService.insertTagList(parserTagListBean,true);
+                parserMessageService.updateHandler(messageId);
 
                 break;
 
             case TAGINDEX :
-                ParserTagIndexBean parserTagIndexBean = (ParserTagIndexBean)parserBean;
+                ParserTagIndexBean parserTagIndexBean = JSON.parseObject(message,ParserTagIndexBean.class);
 
-                parserMessageService.insertTagIndex(parserTagIndexBean,false);
+                messageId = parserMessageService.insertTagIndex(parserTagIndexBean,false);
 
                 JSONObject pageObj = parserBloggerTagIndex.parser(parserTagIndexBean.getTagPath(),parserTagIndexBean.getBloggerName(),
                         parserTagIndexBean.getTagId(),parserTagIndexBean.getUrlType().getType(),parserTagIndexBean.getTagName());
                 bloggerTagPagesHandler.handler(pageObj);
 
-                parserMessageService.insertTagIndex(parserTagIndexBean,true);
+                parserMessageService.updateHandler(messageId);
 
                 break;
             case TAG :
-                ParserTagBean parserTagBean = (ParserTagBean)parserBean;
+                ParserTagBean parserTagBean = JSON.parseObject(message,ParserTagBean.class);
 
-                parserMessageService.insertTag(parserTagBean,false);
+                messageId = parserMessageService.insertTag(parserTagBean,false);
 
                 parserBloggerTagPage.parser(parserTagBean.getTagFilePath(),parserTagBean.getBloggerName(),parserTagBean.getTagId());
 
-                parserMessageService.insertTag(parserTagBean,true);
+                parserMessageService.updateHandler(messageId);
 
                 break;
             default:

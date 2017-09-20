@@ -54,7 +54,7 @@ public class TagDownloadTask implements ITask{
         iMessageSend = (IMessageSend) ContextHolder.getBean(Constant.BeanName.ACTIVE_MQ_MESSAGE_SEND);
         uuidGenerate = (UuidGenerate) ContextHolder.getBean(Constant.BeanName.UUID_GENERATE);
 
-        MyThreadLocal.setRequestId(this.requestId);
+        this.requestId = MyThreadLocal.getRequestId();
     }
 
     @Override

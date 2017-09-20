@@ -6,6 +6,7 @@
 <mapper namespace="com.primecoder.spider.dao.mapper.ParserMessageMapper">
 
     <resultMap id="parserMessageMap" type="com.primecoder.spider.dao.entity.ParserMessageEntity">
+        <result column="id" property="id"/>
         <result column="request_id" property="requestId"/>
         <result column="url_type" property="urlType"/>
         <result column="blogger_name" property="bloggerName"/>
@@ -16,6 +17,7 @@
     </resultMap>
 
     <sql id="queryColumns">
+        id,
         request_id,
         url_type,
         blogger_name,

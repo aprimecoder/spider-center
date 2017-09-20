@@ -35,6 +35,7 @@ public class BloggerPageDownloadByTagController {
         LOGGER.info("get bloggerName ：{} from database!",bloggerNameList);
 
         for (String bloggerName : bloggerNameList) {
+            bloggerName = "jianggest";
             downloadCategoryList(bloggerName);
             downloadTagList(bloggerName);
 
