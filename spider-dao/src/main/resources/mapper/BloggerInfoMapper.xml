@@ -28,6 +28,11 @@
         LIMIT 0,#{size}
     </select>
 
+    <select id="selectAllBloggerName" resultType="String">
+        select blogger_name from blogger_info
+        where is_downloaded = false
+    </select>
+
     <update id="setDownloaded" parameterType="String">
         update blogger_info
         <set>
@@ -35,5 +40,9 @@
         </set>
         where blogger_name = #{bloggerName}
     </update>
+
+    <select id="countUnDownloadBlogger" resultType="Integer">
+        select count(1) cnt from blogger_info where is_downloaded = false
+    </select>
 
 </mapper>

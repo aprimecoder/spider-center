@@ -17,4 +17,8 @@ public interface BloggerInfoMapper extends MyMapper<BloggerInfoEntity>{
     List<String> selectBloggerNameBySize(int size);
 
     void setDownloaded(String bloggerName);
+
+    int countUnDownloadBlogger();
+
+    List<String> selectAllBloggerName();
 }

@@ -37,4 +37,10 @@ public class TestInsertParserMessage {
 
         System.out.println(parserMessageEntity);
     }
+
+    @Test
+    public void testInit() {
+
+        parserMessageMapper.countBloggerInitMessage("12");
+    }
 }

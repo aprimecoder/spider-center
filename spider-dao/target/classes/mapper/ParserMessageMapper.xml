@@ -27,5 +27,10 @@
         is_handler
     </sql>
 
+    <select id="countBloggerInitMessage" parameterType="String" resultType="Integer">
+        select count(1) cnt from blgger_parser_message
+        where blogger_name = #{bloggerName} and url_type = 8
+    </select>
+
 
 </mapper>

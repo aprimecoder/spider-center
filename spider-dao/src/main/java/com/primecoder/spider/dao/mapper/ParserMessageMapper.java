@@ -10,4 +10,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public interface ParserMessageMapper extends MyMapper<ParserMessageEntity>{
+
+    int countBloggerInitMessage(String bloggerName);
 }
